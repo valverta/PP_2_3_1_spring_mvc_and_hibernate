@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Post page</title>
+</head>
+<body>
+    <h1>User info</h1>
+    <br>
+    <form th:action="@{/save-user}" th:object="${user}" method="post">
+        <label for="name">Name: </label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Введите имя"/>
+        <br><br>
+        <label for="surname">Surname: </label>
+        <input type="text" th:field="*{surname}" id="surname" placeholder="Введите фамилию">
+        <br><br>
+        <label for="age">Age: </label>
+        <input type="text" th:field="*{age}" id="age" placeholder="Введите возраст">
+        <br><br>
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class UserServiceIml implements UserService {
     @Autowired
     private UserDAO userDAO;
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
@@ -27,7 +27,7 @@ public class UserServiceIml implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public User getUser(int id) {
         return userDAO.getUser(id);
     }

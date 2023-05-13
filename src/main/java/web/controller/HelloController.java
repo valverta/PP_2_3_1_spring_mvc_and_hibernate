@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import web.dao.UserDAO;
 import web.dao.UserDAOImpl;
 import web.model.User;
 import web.service.UserService;
@@ -35,10 +36,7 @@ public class HelloController {
 
 	@RequestMapping(value = "/save-user")
 	public String saveUser(@ModelAttribute("user") User user) {
-		System.out.println(user);
-		UserDAOImpl use = new UserDAOImpl();
-		use.saveOrUpdateUser(user);
-		//userService.saveOrUpdateUser(user);
+		userService.saveOrUpdateUser(user);
 		return "redirect:/";
 	}
 }

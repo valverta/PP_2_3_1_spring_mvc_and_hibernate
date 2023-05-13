@@ -3,6 +3,7 @@ package web.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManagerFactory;
@@ -13,19 +14,23 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO{
 
     @Autowired
-    private SessionFactory managerFactory;
+    private EntityManagerFactory managerFactory;
 
     @Override
     public List<User> getAllUsers() {
-        managerFactory.createEntityManager().merge(new User("Ahtak", "Znachit", 69));
+        //managerFactory.createEntityManager().merge(new User("Ahtak", "Znachit", 69));
         return managerFactory.createEntityManager().createQuery("FROM User").getResultList();
     }
 
     @Override
     public void saveOrUpdateUser(User user) {
         System.out.println("DAO " + user);
-        managerFactory.createEntityManager().merge(user);
-        //managerFactory.createEntityManager().createNativeQuery("INSERT INTO User (name, surname, age) VALUES ('Imya', 'Famili', 23)").executeUpdate();
+//        managerFactory.createEntityManager().merge(user);
+
+        EntityManager em = managerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(user);
+        em.getTransaction().commit();
     }
 
     @Override

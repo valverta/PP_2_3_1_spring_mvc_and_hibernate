@@ -26,8 +26,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@PropertySource("classpath:db.properties")
-@EnableTransactionManagement
 @ComponentScan(basePackages = "web")
 public class WebConfig implements WebMvcConfigurer {
 
@@ -64,48 +62,5 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
-    }
-
-
-    //////////////////////////////////
-    //конфиг для бд
-
-    @Autowired
-    private Environment env;
-
-    @Bean
-    public DataSource getDataSource() {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        try {
-            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/sys?useSSL=false");
-            dataSource.setUser("root");
-            dataSource.setPassword("123456789");
-        } catch (PropertyVetoException e) {
-            throw new RuntimeException(e);
-        }
-        return dataSource;
-    }
-
-    @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
-
-        Properties props=new Properties();
-//      props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(User.class);
-        return factoryBean;
-    }
-
-    @Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
-        return transactionManager;
     }
 }

@@ -37,7 +37,13 @@
             <version>3.0.14.RELEASE</version>
         </dependency>
 
-<!--        Зависимости для БД-->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.2.0.Final</version>
+        </dependency>
+
+        <!--        Зависимости для БД-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>

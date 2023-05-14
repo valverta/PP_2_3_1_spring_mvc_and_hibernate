@@ -22,7 +22,6 @@ public class UserServiceIml implements UserService {
     @Override
     @Transactional
     public void saveOrUpdateUser(User user) {
-        System.out.println("service "+user);
         userDAO.saveOrUpdateUser(user);
     }
 

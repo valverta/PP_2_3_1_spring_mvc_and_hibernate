@@ -21,8 +21,14 @@ public class UserServiceIml implements UserService {
 
     @Override
     @Transactional
-    public void saveOrUpdateUser(User user) {
-        userDAO.saveOrUpdateUser(user);
+    public void saveUser(User user) {
+        userDAO.saveUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        userDAO.updateUser(user);
     }
 
     @Override

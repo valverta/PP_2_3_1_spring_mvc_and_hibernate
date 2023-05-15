@@ -12,7 +12,7 @@ import web.service.UserService;
 import javax.validation.Valid;
 
 @Controller
-public class HelloController {
+public class UserController {
 
 	@Autowired
 	private UserService userService;
@@ -33,7 +33,7 @@ public class HelloController {
 	public String addNewUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "post-page";
-		userService.saveOrUpdateUser(user);
+		userService.saveUser(user);
 		return "redirect:/";
 	}
 
@@ -47,7 +47,7 @@ public class HelloController {
 	public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "update-page";
-		userService.saveOrUpdateUser(user);
+		userService.updateUser(user);
 		return "redirect:/";
 	}
 
